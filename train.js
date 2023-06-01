@@ -1,26 +1,21 @@
 console.log("WELCOME TRAIN ARENA");
-const moment = require("moment");
 
+/**CHALLENGE: 5 CAN YOU SORT ME!? */
 
+const detail_list = [12, 23, 55, null, 34, 25, null, 45, null];
 
+function tartiblikSortlash(detail_list) {
+  detail_list.sort((a, b) => {
+    if (a === null) return 1;
+    if (b === null) return -1;
+    return a - b;
+  });
+  return detail_list;
+}
+const result1 = tartiblikSortlash(detail_list);
+console.log("result:", result1);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// const moment = require("moment");
 
 // /** CHALLENGE: MAX PROFIT */
 
@@ -38,7 +33,7 @@ const moment = require("moment");
 
 //     if (stock_prices[i] > kattaSon) {
 //       kattaSon = stock_prices[i];
-      
+
 //     }
 //   }
 
@@ -56,7 +51,7 @@ const moment = require("moment");
 //   console.log(`You should buy stock => index: ${indexPrices}, profit: ${maxProfit} `);
 // }
 
-// const prices = [2, 5, 3, 10];
+// const prices = [2, 1, 30, 3, 10];
 // buyStock(prices);
 
-
+// console.log("You should buy stock =>", buyStock(prices));
