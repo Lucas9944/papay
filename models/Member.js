@@ -1,5 +1,7 @@
 const MemberModel = require("../schema/member.model");
 const Definer = require("../lib/mistake");
+const assert = require("assert");
+const { exec } = require("child_process");
 
 class Member {
   constructor() {
@@ -20,6 +22,28 @@ class Member {
 
       result.mb_password = "";
       return result;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async loginData(input) {
+    try {
+      const member = await this.memberModel
+        .findOne({ mb_nick: input.mb_nick }, { mb_nick: 1, mb_password: 1 })
+        .exec();
+
+      assert.ok(member, Definer.err_auth3);
+
+      const isMach = input.mb_password === member.mb_password;
+      assert.ok(member, Definer.err_auth4);
+
+      return await this.memberModel
+        .findOne({
+          mb_nick: input.mb_nick,
+        })
+        .exec();
+      // console.log("member::::", member);
     } catch (err) {
       throw err;
     }
