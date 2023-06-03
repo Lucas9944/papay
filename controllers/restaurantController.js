@@ -1,7 +1,7 @@
 const Member = require("../models/Member");
-let memberController = module.exports;
+let restaurantController = module.exports;
 
-memberController.signup = async (req, res) => {
+restaurantController.getSignupRestaurant = async (req, res) => {
   try {
     console.log(`GET: cont/getSignupRestaurant`);
     res.render('signup');
@@ -11,7 +11,7 @@ memberController.signup = async (req, res) => {
   }
 };
 
-memberController.signupProcess = async (req, res) => {
+restaurantController.signupProcess = async (req, res) => {
   try {
     console.log(`POST: cont/signup`);
     const data = req.body,
@@ -25,7 +25,7 @@ memberController.signupProcess = async (req, res) => {
   }
 };
 
-memberController.login = async (req, res) => {
+restaurantController.getLoginMyRestaurant = async (req, res) => {
   try {
     console.log(`GET: cont/getLoginMyRestaurant`);
     res.render("login-page");
@@ -35,7 +35,7 @@ memberController.login = async (req, res) => {
   }
 };
 
-memberController.loginProcess = async (req, res) => {
+restaurantController.loginProcess = async (req, res) => {
   try {
     console.log(`POST: cont/login`);
     const data = req.body,
@@ -49,7 +49,7 @@ memberController.loginProcess = async (req, res) => {
   }
 };
 
-memberController.logout = (req, res) => {
+restaurantController.logout = (req, res) => {
   console.log("GET cont.logout");
   res.send("logout sahifasidasiz");
 };
