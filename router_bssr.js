@@ -2,6 +2,7 @@ const express = require("express");
 const router_bssr = express.Router();
 const restaurantController = require("./controllers/restaurantController");
 const productController = require("./controllers/restaurantController");
+const { uploadProductImage } = require("./utils/upload-multer");
 
 /*******************************
  *          REST EJS           *
@@ -22,6 +23,7 @@ router_bssr
   .post(
     "/products/create",
     restaurantController.validateAuthRestaurant,
+    uploadProductImage.single("product-image"),
     productController.addNewProduct
   );
 
