@@ -33,22 +33,22 @@ class Member {
   async loginData(input) {
     try {
       const member = await this.memberModel
-        .findOne({ mb_nick: input.mb_nick }, { mb_nick: 1, mb_password: 1 })
+        .findOne(
+          { mb_nick: input.mb_nick }, 
+          { mb_nick: 1, mb_password: 1, _id: 0})
         .exec();
 
-      assert.ok(member, Definer.err_auth3);
+      assert.ok(member, Definer.err_auth2);
 
       const isMach = await bcrypt.compare(
         input.mb_password,
         member.mb_password
       );
-      assert.ok(isMach, Definer.err_auth4);
+      assert.ok(isMach, Definer.err_auth3);
 
       return await this.memberModel
-        .findOne({
-          mb_nick: input.mb_nick,
-        })
-        .exec();
+      .findOne({ mb_nick: input.mb_nick })
+      .exec();
       // console.log("member::::", member);
     } catch (err) {
       throw err;
