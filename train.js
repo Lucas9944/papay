@@ -1,5 +1,5 @@
 console.log("WELCOME TRAIN ARENA");
-/** 📩Shunday function tuzing, 
+/** Shunday function tuzing, 
  * unga string argument pass bolsin. 
  * Function ushbu agrumentdagi faqat digitlarni 
  * yangi stringda return qilsin!
