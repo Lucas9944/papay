@@ -38,7 +38,7 @@ class Member {
           { mb_nick: 1, mb_password: 1, _id: 0})
         .exec();
 
-      assert.ok(member, Definer.err_auth2);
+      assert.ok(member, Definer.err_auth3);
 
       const isMach = await bcrypt.compare(
         input.mb_password,

@@ -1,19 +1,51 @@
 console.log("WELCOME TRAIN ARENA");
+/** 📩Shunday function tuzing, 
+ * unga string argument pass bolsin. 
+ * Function ushbu agrumentdagi faqat digitlarni 
+ * yangi stringda return qilsin!
+ * Masalan: findDigits('ad5we34jkf89') return qilishi 
+ * kerak bolgan qiymat '53489' */
 
-/**CHALLENGE: 5 CAN YOU SORT ME!? */
-
-const detail_list = [12, 23, 55, null, 34, 25, null, 45, null];
-
-function tartiblikSortlash(detail_list) {
-  detail_list.sort((a, b) => {
-    if (a === null) return 1;
-    if (b === null) return -1;
-    return a - b;
-  });
-  return detail_list;
+function faqatDigitQabul(str) {
+  let digits = str.replace(/\D/g, "");
+  return digits;
 }
-const result1 = tartiblikSortlash(detail_list);
-console.log("result:", result1);
+
+let a = "ad5we34jkf89";
+let result = faqatDigitQabul(a);
+console.log(result);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// /**CHALLENGE: 5 CAN YOU SORT ME!? */
+
+// const detail_list = [12, 23, 55, null, 34, 25, null, 45, null];
+
+// function tartiblikSortlash(detail_list) {
+//   detail_list.sort((a, b) => {
+//     if (a === null) return 1;
+//     if (b === null) return -1;
+//     return a - b;
+//   });
+//   return detail_list;
+// }
+// const result1 = tartiblikSortlash(detail_list);
+// console.log("result:", result1);
 
 // const moment = require("moment");
 
