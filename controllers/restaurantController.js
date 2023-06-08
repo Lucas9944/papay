@@ -6,7 +6,7 @@ restaurantController.getMyRestaurantData = async (req, res) => {
     console.log(`GET: cont/getMyRestaurantData`);
     // TODO: Get my restaurant products
 
-    res.render("restaurant-menu");
+    res.render('restaurant-menu');
   } catch (err) {
     console.log(`ERROR, cont/getMyRestaurantData, ${err.message}`);
     res.json({ state: "fail", message: err.message });
@@ -31,10 +31,8 @@ restaurantController.signupProcess = async (req, res) => {
       new_member = await member.signupData(data);
 
     req.session.member = new_member;
-    res.redirect("/resto/products/menu");
-
+    res.redirect('/resto/products/menu');
     // SESSION
-
     // res.json({ state: "succeed", data: new_member });
   } catch (err) {
     console.log(`ERROR, cont/signup, ${err.message}`);
@@ -76,8 +74,7 @@ restaurantController.logout = (req, res) => {
 
 restaurantController.validateAuthRestaurant = (req, res, next) => {
   if (req.session?.member?.mb_type === "RESTAURANT") {
-    req.member = 
-      req.member.member;
+    req.member = req.session.member;
     next();
   } else
     res.json({
@@ -85,6 +82,7 @@ restaurantController.validateAuthRestaurant = (req, res, next) => {
       message: "Only authenticated members with restaurant type",
     });
 };
+
 
 restaurantController.checkSessions = (req, res) => {
   if (req.session?.member) {

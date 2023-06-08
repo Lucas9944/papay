@@ -18,11 +18,11 @@ router_bssr
 router_bssr.get("/logout", restaurantController.logout);
 router_bssr.get("/check-me", restaurantController.checkSessions);
 
-router_bssr.get("products/menu", restaurantController.getMyRestaurantData);
+router_bssr.get("/products/menu", restaurantController.getMyRestaurantData);
 router_bssr.post(
   "/products/create",
   restaurantController.validateAuthRestaurant,
-  uploader_product.array("product-image", 5),
+  uploader_product.array("product-images", 5),
   productController.addNewProduct
 );
 router_bssr.post("products/edit/:id", productController.updateChosenProduct);
