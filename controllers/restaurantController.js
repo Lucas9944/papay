@@ -1,14 +1,16 @@
 const Member = require("../models/Member");
+const Product = require("../models/Product");
+
 let restaurantController = module.exports;
 
-restaurantController.getMyRestaurantData = async (req, res) => {
+restaurantController.getMyRestaurantProducts = async (req, res) => {
   try {
-    console.log(`GET: cont/getMyRestaurantData`);
-    // TODO: Get my restaurant products
-
-    res.render('restaurant-menu');
+    console.log(`GET: cont/getMyRestaurantProducts`);
+    const product = new Product();
+    const data = await product.getAllProductsDataResto(res.locals.member);
+    res.render("restaurant-menu", { restaurant_data: data });
   } catch (err) {
-    console.log(`ERROR, cont/getMyRestaurantData, ${err.message}`);
+    console.log(`ERROR, cont/getMyRestaurantProducts, ${err.message}`);
     res.json({ state: "fail", message: err.message });
   }
 };
@@ -31,7 +33,7 @@ restaurantController.signupProcess = async (req, res) => {
       new_member = await member.signupData(data);
 
     req.session.member = new_member;
-    res.redirect('/resto/products/menu');
+    res.redirect("/resto/products/menu");
     // SESSION
     // res.json({ state: "succeed", data: new_member });
   } catch (err) {
@@ -82,7 +84,6 @@ restaurantController.validateAuthRestaurant = (req, res, next) => {
       message: "Only authenticated members with restaurant type",
     });
 };
-
 
 restaurantController.checkSessions = (req, res) => {
   if (req.session?.member) {
