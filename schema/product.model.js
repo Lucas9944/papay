@@ -3,6 +3,7 @@ const {
   product_collection_enums,
   product_volume_enums,
   product_size_enums,
+  product_status_enums,
 } = require("../lib/config");
 const Schema = mongoose.Schema;
 
@@ -22,7 +23,7 @@ const productSchema = new mongoose.Schema(
       required: false,
       default: "PAUSED",
       enum: {
-        values: [product_status_enums],
+        values: product_status_enums,
         message: "{VALUE} is not among permitted enum values",
       },
     },
