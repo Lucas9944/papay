@@ -1,11 +1,10 @@
 const dotenv = require("dotenv");
-dotenv.config();
-
+dotenv.config(); // require qilgandan so'ng, dotenv config bir xil kelgan shuning uchun hard doim birga yozishimiz shart!
 const http = require("http");
 const mongoose = require("mongoose");
-mongoose.set("strictQuery", false);
+mongoose.set("strictQuery", false); /// error bermasliggi uchun 
 
-const connectionString = process.env.MONGO_URL;
+const connectionString = process.env.MONGO_URL; /// 
 mongoose.connect(
   connectionString,
   {

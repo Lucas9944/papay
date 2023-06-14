@@ -6,7 +6,7 @@ const router_bssr = require("./router_bssr.js"); //.default;
 
 let session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const store = new MongoDBStore({
+const store = new MongoDBStore({ /// Mongodb classi 
   uri: process.env.MONGO_URL,
   collection: "sessions",
 });
@@ -30,7 +30,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  res.locals.member = req.session.member;
+  res.locals.member = req.session.member;  // bu res.locals har bitda gelayotgab requestning response qismiga memberdi yuklab beryabdi member objectni
   next();
 });
 

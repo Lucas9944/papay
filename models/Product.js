@@ -15,7 +15,7 @@ class Product {
         restaurant_mb_id: member._id,
       });
       assert.ok(result, Definer.general_err1);
-      return result;
+      return result; // buni natijasi restaraunt qatordegi 11 qatorga boradi:
     } catch {
       throw err;
     }
