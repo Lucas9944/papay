@@ -22,9 +22,11 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -34,9 +36,11 @@ body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -130,6 +134,7 @@ body {
   height: 70px;
   background: #33a0ff;
   border-radius: 10px;
+ 
 
   font-family: "Poppins";
   font-style: normal;
