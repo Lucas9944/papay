@@ -8,6 +8,7 @@ const uploader_product = require("./utils/upload-multer")("products");
  *          REST EJS           *
  *******************************/
 
+
 router_bssr.get("/", restaurantController.home);
 
 router_bssr
