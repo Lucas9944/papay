@@ -134,7 +134,7 @@ body {
   height: 70px;
   background: #33a0ff;
   border-radius: 10px;
- 
+
 
   font-family: "Poppins";
   font-style: normal;
@@ -160,7 +160,6 @@ body {
   margin-top: 15px;
   width: 49%;
   height: auto;
-
   display: flex;
   flex-direction: column;
 }
