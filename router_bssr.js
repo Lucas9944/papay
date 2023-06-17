@@ -3,6 +3,7 @@ const router_bssr = express.Router();
 const restaurantController = require("./controllers/restaurantController");
 const productController = require("./controllers/productController");
 const uploader_product = require("./utils/upload-multer")("products");
+const uploader_members = require("./utils/upload-multer")("members");
 
 /*******************************
  *          REST EJS           *
@@ -12,7 +13,10 @@ router_bssr.get("/", restaurantController.home);
 
 router_bssr
   .get("/sign-up", restaurantController.getSignupMyRestaurant)
-  .post("/sign-up", restaurantController.signupProcess);
+  .post("/sign-up", 
+  uploader_members.single('restaurant_img'), 
+  restaurantController.signupProcess
+  );
 
 router_bssr
   .get("/login", restaurantController.getLoginMyRestaurant)
@@ -20,7 +24,7 @@ router_bssr
 router_bssr.get("/logout", restaurantController.logout);
 router_bssr.get("/check-me", restaurantController.checkSessions);
 
-router_bssr.get("/products/menu", restaurantController.getMyRestaurantProducts);
+router_bssr.get("/products/menu",  restaurantController.getMyRestaurantProducts);
 router_bssr.post(
   "/products/create",
   restaurantController.validateAuthRestaurant,
