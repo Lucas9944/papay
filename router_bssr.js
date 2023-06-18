@@ -13,7 +13,8 @@ router_bssr.get("/", restaurantController.home);
 
 router_bssr
   .get("/sign-up", restaurantController.getSignupMyRestaurant)
-  .post("/sign-up", 
+  .post(
+    "/sign-up", 
   uploader_members.single('restaurant_img'), 
   restaurantController.signupProcess
   );
