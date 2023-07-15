@@ -3,10 +3,12 @@ const express = require("express");
 const app = express();
 const router = require("./router.js");
 const router_bssr = require("./router_bssr.js"); //.default;
+const cookieParser = require("cookie-parser");
 
 let session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const store = new MongoDBStore({ /// Mongodb classi 
+const store = new MongoDBStore({
+  /// Mongodb classi
   uri: process.env.MONGO_URL,
   collection: "sessions",
 });
@@ -15,6 +17,7 @@ const store = new MongoDBStore({ /// Mongodb classi
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //2: Session code
 app.use(
@@ -30,7 +33,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
-  res.locals.member = req.session.member;  // bu res.locals har bitda gelayotgab requestning response qismiga memberdi yuklab beryabdi member objectni
+  res.locals.member = req.session.member; // bu res.locals har bitda gelayotgab requestning response qismiga memberdi yuklab beryabdi member objectni
   next();
 });
 
@@ -43,6 +46,5 @@ app.use("/resto", router_bssr);
 app.use("/", router);
 
 module.exports = app;
-
 
 ////////
