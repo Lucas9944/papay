@@ -5,6 +5,7 @@ const {
   ordernary_enums,
 } = require("../lib/config");
 
+
 const memberSchema = new mongoose.Schema(
   {
     mb_nick: {
