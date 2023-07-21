@@ -1,7 +1,7 @@
 const assert = require("assert");
 const { shapeIntoMongooseObjectId } = require("../lib/config");
-const Definer = require("../lib/mistake");
 const ProductModel = require("../schema/product.model");
+const Definer = require("../lib/mistake");
 const Member = require("./Member");
 
 class Product {
@@ -44,6 +44,7 @@ class Product {
   }
 
   async getChosenProductData(member, id) {
+   
     try {
       const auth_mb_id = shapeIntoMongooseObjectId(member?._id);
       id = shapeIntoMongooseObjectId(id);
@@ -60,7 +61,7 @@ class Product {
         ])
         .exec();
 
-      assert.ok(result, Definer.general_err1);
+      assert.ok(result, Definer.genera);
       return result;
     } catch (err) {
       throw err;

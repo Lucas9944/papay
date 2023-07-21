@@ -1,7 +1,7 @@
-const Member = require("../models/Member");
+const memberController = module.exports;
 const assert = require("assert");
+const Member = require("../models/Member");
 
-let memberController = module.exports;
 const jwt = require("jsonwebtoken");
 const Definer = require("../lib/mistake");
 

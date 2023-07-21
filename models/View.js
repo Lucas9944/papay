@@ -1,5 +1,5 @@
-const MemberModel = require("../schema/member.model");
 const ViewModel = require("../schema/view.model");
+const MemberModel = require("../schema/member.model");
 const ProductModel = require("../schema/product.model");
 
 class View {
@@ -75,7 +75,7 @@ class View {
               {
                 _id: view_ref_id,
               },
-              { $inc: { mb_views: 1 } }
+              { $inc: { product_views: 1 } }
             )
             .exec();
           break;

@@ -1,16 +1,17 @@
 const MemberModel = require("../schema/member.model");
 const Definer = require("../lib/mistake");
+const View = require("../models/View");
+
 const assert = require("assert");
 const bcrypt = require("bcryptjs");
 const { shapeIntoMongooseObjectId } = require("../lib/config");
-const View = require("./View");
-// const View = require("./View");
-// const View = require("../schema/view.model");
 
 class Member {
   constructor() {
     this.memberModel = MemberModel;
   }
+
+  // singup of Member class
 
   async signupData(input) {
     try {
@@ -72,6 +73,7 @@ class Member {
         .aggregate([
           { $match: { _id: id, mb_status: "ACTIVE" } },
           { $unset: "mb_password" },
+          { $unset: ["mb_password", "mb_image", "mb_phone"] },
         ])
         .exec();
 

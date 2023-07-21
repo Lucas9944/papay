@@ -1,8 +1,8 @@
-const Product = require("../models/Product");
 const assert = require("assert");
 const Definer = require("../lib/mistake");
+const Product = require("../models/Product");
 
-let productController = module.exports;
+const productController = module.exports;
 
 productController.getAllProducts = async (req, res) => {
   try {

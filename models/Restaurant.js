@@ -8,6 +8,17 @@ class Restaurant {
     this.memberModel = MemberModel;
   }
 
+  //get res data
+
+  async getRestaurantData() {
+    try {
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  //get all res data
+
   async getAllRestaurantsData() {
     try {
       const result = await this.memberModel
@@ -33,7 +44,6 @@ class Restaurant {
           returnDocument: "after",
         })
         .exec();
-
 
       assert.ok(result, Definer.general_err1);
       return result;
