@@ -20,9 +20,9 @@ restaurantController.getRestaurants = async (req, res) => {
   }
 };
 
-/**************************
- * BSSR RELATED METHODS
- **************************/
+/****************************
+*    BSSR RELATED METHODS   *
+*****************************/
 
 restaurantController.home = (req, res) => {
   try {
