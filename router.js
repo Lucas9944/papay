@@ -34,7 +34,7 @@ router.get(
 
 // Restaurant related routers
 router.get(
-  "/products/:id",
+  "/restaurants",
   memberController.retrieveAuthMember,
   restaurantController.getRestaurants
 );
