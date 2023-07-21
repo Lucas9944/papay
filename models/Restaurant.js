@@ -2,6 +2,7 @@ const assert = require("assert");
 const { shapeIntoMongooseObjectId } = require("../lib/config");
 const Definer = require("../lib/mistake");
 const MemberModel = require("../schema/member.model");
+const Member = require("./Member");
 
 class Restaurant {
   constructor() {
@@ -82,6 +83,33 @@ class Restaurant {
       return result;
     } catch (err) {
       throw err;
+    }
+  }
+
+  //get choen restData
+  async getChosenRestaurantData(member, id) {
+    try {
+      id = shapeIntoMongooseObjectId(id);
+
+      //increase views if member has not seen the target before
+
+      if (member) {
+        const member_obj = new Member();
+        await member_obj.viewChosenItemByMember(member, id, "member");
+      }
+
+      const result = await this.memberModel
+        .findOne({
+          _id: id,
+          mb_status: "ACTIVE",
+        })
+        .exec();
+
+      assert.ok(result, Definer.general_err2);
+      console.log(result);
+      return result;
+    } catch (error) {
+      throw error;
     }
   }
 }

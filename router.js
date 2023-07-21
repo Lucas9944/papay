@@ -33,10 +33,20 @@ router.get(
 );
 
 // Restaurant related routers
+
+// get all restaurants data
 router.get(
   "/restaurants",
   memberController.retrieveAuthMember,
   restaurantController.getRestaurants
+);
+
+// get chosen restaurant
+
+router.get(
+  "/restaurants/:id",
+  memberController.retrieveAuthMember,
+  restaurantController.getChosenRestaurant
 );
 
 module.exports = router;
