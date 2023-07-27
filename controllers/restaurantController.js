@@ -1,4 +1,4 @@
-const Definer = require("../lib/mistake");
+const Definer = require("../lib/mistake").default;
 const Member = require("../models/Member");
 const Product = require("../models/Product");
 const assert = require("assert");

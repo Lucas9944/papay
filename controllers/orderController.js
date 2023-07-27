@@ -1,7 +1,7 @@
 const Order = require("../models/Order");
 let orderController = module.exports;
 const assert = require("assert");
-const Definer = require("../lib/mistake");
+const Definer = require("../lib/mistake").default;
 
 orderController.createOrder = async (req, res) => {
   try {

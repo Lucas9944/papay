@@ -31,6 +31,7 @@ memberController.login = async (req, res) => {
     const data = req.body,
       member = new Member(),
       result = await member.loginData(data);
+    
 
     const token = memberController.createToken(result);
     res.cookie("access_token", token, {

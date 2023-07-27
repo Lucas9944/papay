@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Definer = require("../lib/mistake");
+const Definer = require("../lib/mistake").default;
 const Product = require("../models/Product");
 
 const productController = module.exports;

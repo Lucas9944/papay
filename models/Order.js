@@ -1,5 +1,5 @@
 const { shapeIntoMongooseObjectId } = require("../lib/config");
-const Definer = require("../lib/mistake");
+const Definer = require("../lib/mistake").default;
 const OrderModel = require("../schema/order.model");
 const OrderItemModel = require("../schema/order_item.model");
 const assert = require("assert");
