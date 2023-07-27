@@ -1,6 +1,7 @@
 const BoArticleModel = require("../schema/bo_article.model");
 const Definer = require("../lib/mistake");
 const assert = require("assert");
+const Member = require("./Member");
 const {
   shapeIntoMongooseObjectId,
   board_id_enum_list,
@@ -99,8 +100,26 @@ class Community {
           //TODO: check auth member liked the chosen target
         ])
         .exec();
-     
 
+      assert.ok(result, Definer.article_err3);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getChosenArticleData(member, art_id) {
+    try {
+      art_id = shapeIntoMongooseObjectId(art_id);
+
+      //increase art_views if the user has not seen  yet
+      if (member) {
+        const member_obj = new Member();
+        await member_obj.viewChosenItemByMember(member, art_id, "community");
+      }
+
+      const result = await this.boArticleModel.findById({ _id: art_id }).exec();
+     
       assert.ok(result, Definer.article_err3);
       return result;
     } catch (error) {
