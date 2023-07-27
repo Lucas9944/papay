@@ -47,8 +47,9 @@ class Community {
               localField: "mb_id",
               foreignField: "_id",
               as: "member_data",
-            }
-          }
+            },
+          },
+          { $unwind: "$member_data"}
         ])
         .exec();
 
