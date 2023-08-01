@@ -5,6 +5,7 @@ const Member = require("./Member");
 const {
   shapeIntoMongooseObjectId,
   board_id_enum_list,
+  lookup_auth_member_liked,
 } = require("../lib/config");
 
 class Community {
@@ -54,7 +55,7 @@ class Community {
             },
           },
           { $unwind: "$member_data" },
-          //todo: check auth member liked the chosen target
+          lookup_auth_member_liked(auth_mb_id),
         ])
         .exec();
 
@@ -97,7 +98,7 @@ class Community {
           },
           { $unwind: "$member_data" },
 
-          //TODO: check auth member liked the chosen target
+          lookup_auth_member_liked(auth_mb_id),
         ])
         .exec();
 
@@ -119,7 +120,7 @@ class Community {
       }
 
       const result = await this.boArticleModel.findById({ _id: art_id }).exec();
-     
+
       assert.ok(result, Definer.article_err3);
       return result;
     } catch (error) {

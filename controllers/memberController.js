@@ -31,7 +31,6 @@ memberController.login = async (req, res) => {
     const data = req.body,
       member = new Member(),
       result = await member.loginData(data);
-    
 
     const token = memberController.createToken(result);
     res.cookie("access_token", token, {
@@ -108,5 +107,27 @@ memberController.retrieveAuthMember = (req, res, next) => {
   } catch (err) {
     console.log(`ERROR, cont/retrieveAuthMember, ${err.message}`);
     next();
+  }
+};
+
+memberController.likeMemberChosen = async (req, res) => {
+  try {
+    console.log("POST=> cont/likeMemberChosen");
+    assert.ok(req.member, Definer.auth_err4);
+
+    const member = new Member(),
+      like_ref_id = req.body.like_ref_id,
+      group_type = req.body.group_type;
+
+    const result = await member.likeChosenItemByMember(
+      req.member,
+      like_ref_id,
+      group_type
+    );
+
+    res.json({ state: "success", data: result });
+  } catch (error) {
+    console.log(`ERROR, cont/likeMemberChosen, ${error.message}`);
+    res.json({ state: "fail", message: error.message });
   }
 };

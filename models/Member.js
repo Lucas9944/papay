@@ -7,7 +7,9 @@ const bcrypt = require("bcryptjs");
 const {
   shapeIntoMongooseObjectId,
   lookup_auth_member_following,
+  lookup_auth_member_liked,
 } = require("../lib/config");
+const Like = require("./Like");
 
 class Member {
   constructor() {
@@ -75,6 +77,8 @@ class Member {
       if (member) {
         // condition if not seen before
         await this.viewChosenItemByMember(member, id, "member");
+        //check if auth member liked the chosen target
+        aggregateQuery.push(lookup_auth_member_liked(auth_member_id));
         aggregateQuery.push(
           lookup_auth_member_following(auth_member_id, "members")
         );
@@ -109,6 +113,69 @@ class Member {
       return true;
     } catch (err) {
       throw err;
+    }
+  }
+
+  async likeChosenItemByMember(member, like_ref_id, group_type) {
+    try {
+      like_ref_id = shapeIntoMongooseObjectId(like_ref_id);
+      const mb_id = shapeIntoMongooseObjectId(member._id);
+
+      const like = new Like(mb_id);
+      //validate target
+      const isValid = await like.valideTargetItem(like_ref_id, group_type);
+
+      assert.ok(isValid, Definer.general_err2);
+
+      //doesExist
+
+      const doesExist = await like.checkLikeExistence(like_ref_id);
+
+      const data = doesExist
+        ? await like.removeMemberLike(like_ref_id, group_type)
+        : await like.insertMemberLike(like_ref_id, group_type);
+
+      assert.ok(data, Definer.general_err1);
+
+      const result = {
+        like_group: data.like_group,
+        like_ref_id: data.like_ref_id,
+        like_status: doesExist ? 0 : 1,
+      };
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async likeChosenItemByMember(member, like_ref_id, group_type) {
+    try {
+      like_ref_id = shapeIntoMongooseObjectId(like_ref_id);
+      const mb_id = shapeIntoMongooseObjectId(member._id);
+
+      const like = new Like(mb_id);
+      //validate target
+      const isValid = await like.valideTargetItem(like_ref_id, group_type);
+
+      assert.ok(isValid, Definer.general_err2);
+
+      //doesExist
+
+      const doesExist = await like.checkLikeExistence(like_ref_id);
+
+      const data = doesExist
+        ? await like.removeMemberLike(like_ref_id, group_type)
+        : await like.insertMemberLike(like_ref_id, group_type);
+
+      assert.ok(data, Definer.general_err1);
+
+      const result = {
+        like_group: data.like_group,
+        like_ref_id: data.like_ref_id,
+        like_status: doesExist ? 0 : 1,
+      };
+      return result;
+    } catch (error) {
+      throw error;
     }
   }
 }
