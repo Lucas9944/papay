@@ -118,4 +118,6 @@ router.post(
   followController.unsubscibe
 );
 
+router.get("/follow/followings", followController.getMemberFollowings);
+
 module.exports = router;
