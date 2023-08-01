@@ -19,24 +19,23 @@ followController.subscribe = async (req, res) => {
   }
 };
 
-  //unsubscribe
+//unsubscribe
 
-  followController.unsubscibe = async (req, res) => {
-    try {
-      console.log("POST: cont/unsubscribe");
-      assert.ok(req.member, Definer.err_auth5);
+followController.unsubscibe = async (req, res) => {
+  try {
+    console.log("POST: cont/unsubscribe");
+    assert.ok(req.member, Definer.err_auth5);
 
-      const follow = new Follow();
-      await follow.unsubscribeData(req.member, req.body);
+    const follow = new Follow();
+    await follow.unsubscribeData(req.member, req.body);
 
-      res.json({ state: "success", data: "unsubscribed" });
-    } catch (error) {
-      console.log(`ERROR, cont/subscribe, ${error.message}`);
-      res.json({ state: "fail", message: error.message });
-    }
-  };
+    res.json({ state: "success", data: "unsubscribed" });
+  } catch (error) {
+    console.log(`ERROR, cont/subscribe, ${error.message}`);
+    res.json({ state: "fail", message: error.message });
+  }
+};
 
-  
 followController.getMemberFollowings = async (req, res) => {
   try {
     console.log("GET: cont/getMemberFollowings");
@@ -46,6 +45,18 @@ followController.getMemberFollowings = async (req, res) => {
     res.json({ state: "success", data: result });
   } catch (error) {
     console.log(`ERROR, cont/subscribe, ${error.message}`);
+    res.json({ state: "fail", message: error.message });
+  }
+};
+followController.getMemberFollowers = async (req, res) => {
+  try {
+    console.log("GET: cont/getMemberFollowers");
+
+    const follow = new Follow();
+    const result = await follow.getMemberFollowersData(req.member, req.query);
+    res.json({ state: "success", data: result });
+  } catch (error) {
+    console.log(`ERROR, cont/getMemberFollowers, ${error.message}`);
     res.json({ state: "fail", message: error.message });
   }
 };
