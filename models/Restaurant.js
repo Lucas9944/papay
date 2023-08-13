@@ -1,10 +1,10 @@
 const assert = require("assert");
+const MemberModel = require("../schema/member.model");
+const Definer = require("../lib/mistake");
 const {
   shapeIntoMongooseObjectId,
   lookup_auth_member_liked,
 } = require("../lib/config");
-const Definer = require("../lib/mistake").default;
-const MemberModel = require("../schema/member.model");
 const Member = require("./Member");
 
 class Restaurant {
@@ -44,6 +44,9 @@ class Restaurant {
       aggregationQuery.push({ $skip: (data.page - 1) * data.limit });
       aggregationQuery.push({ $limit: data.limit });
       aggregationQuery.push(lookup_auth_member_liked(auth_mb_id));
+    
+
+      //todo: check auth member liked the chosen target
 
       const result = await this.memberModel.aggregate(aggregationQuery).exec();
       assert.ok(result, Definer.general_err1);
@@ -54,13 +57,10 @@ class Restaurant {
   }
 
   //get all res data
-
   async getAllRestaurantsData() {
     try {
       const result = await this.memberModel
-        .find({
-          mb_type: "RESTAURANT",
-        })
+        .find({ mb_type: "RESTAURANT" })
         .exec();
 
       assert(result, Definer.general_err1);
@@ -70,11 +70,13 @@ class Restaurant {
     }
   }
 
-  async updateRestaurantByAdminData(update_data) {
+  async updateRestaurantByAdminData(updated_data) {
+    console.log("Rest:update:", updated_data);
     try {
-      const id = shapeIntoMongooseObjectId(update_data?.id);
+      const id = shapeIntoMongooseObjectId(updated_data?.id);
+
       const result = await this.memberModel
-        .findByIdAndUpdate({ _id: id }, update_data, {
+        .findByIdAndUpdate({ _id: id }, updated_data, {
           runValidators: true,
           lean: true,
           returnDocument: "after",
@@ -88,7 +90,7 @@ class Restaurant {
     }
   }
 
-  //get choen restData
+  //get chosen restData
   async getChosenRestaurantData(member, id) {
     try {
       id = shapeIntoMongooseObjectId(id);
@@ -108,7 +110,7 @@ class Restaurant {
         .exec();
 
       assert.ok(result, Definer.general_err2);
-      console.log(result);
+     
       return result;
     } catch (error) {
       throw error;

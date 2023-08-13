@@ -1,5 +1,5 @@
 const assert = require("assert");
-const Definer = require("../lib/mistake").default;
+const Definer = require("../lib/mistake");
 const Product = require("../models/Product");
 
 const productController = module.exports;
@@ -12,9 +12,15 @@ productController.getAllProducts = async (req, res) => {
     res.json({ state: "success", data: result });
   } catch (err) {
     console.log(`ERROR, cont/getAllProducts, ${err.message}`);
-    res.json({ state: "fail", message: err.message });
+
+    if (err.general_err1) {
+      res.json({ state: "fail", message: err.general_err1 });
+    } else {
+      res.json({ state: "fail", message: err.message });
+    }
   }
 };
+
 
 productController.getChosenProduct = async (req, res) => {
   try {
